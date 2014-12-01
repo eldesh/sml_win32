@@ -57,17 +57,17 @@ end
 struct
 local
 in
-    type HWND = MLton.Pointer.t
+    type HWND = C_Pointer.t
 
     structure MessageBoxStyle =
     struct
-        type flags = SysWord.word
-        fun toWord f = f
-        fun fromWord f = f
-        val flags = List.foldl (fn (a, b) => SysWord.orb(a,b)) 0w0
-        fun allSet (fl1, fl2) = SysWord.andb(fl1, fl2) = fl1
-        fun anySet (fl1, fl2) = SysWord.andb(fl1, fl2) <> 0w0
-        fun clear (fl1, fl2) = SysWord.andb(SysWord.notb fl1, fl2)
+        type flags = Word32.word
+        fun toWord f = SysWord.fromLarge (Word32.toLarge f)
+        fun fromWord f = Word32.fromLarge (SysWord.toLarge f)
+        val flags = List.foldl Word32.orb 0w0
+        fun allSet (fl1, fl2) = Word32.andb(fl1, fl2) = fl1
+        fun anySet (fl1, fl2) = Word32.andb(fl1, fl2) <> 0w0
+        fun clear (fl1, fl2) = Word32.andb(Word32.notb fl1, fl2)
 
         val MB_OK                       = 0wx00000000
         val MB_OKCANCEL                 = 0wx00000001
@@ -116,7 +116,7 @@ in
                         MB_DEFAULT_DESKTOP_ONLY, MB_TOPMOST, MB_RIGHT, MB_RTLREADING,
                         MB_SERVICE_NOTIFICATION, MB_SERVICE_NOTIFICATION_NT3X]
 
-        val intersect = List.foldl (fn (a, b) => SysWord.andb(a,b)) all
+        val intersect = List.foldl (fn (a, b) => Word32.andb(a,b)) all
     end
 
     (* Return values from a message box.  Should this be a datatype? *)
@@ -140,8 +140,7 @@ in
       C_MessageBoxA (hwnd, text, caption, style)
 
     val C_MessageBeep =
-      _import "MessageBeep" stdcall
-      : MessageBoxStyle.flags -> int;
+      _import "MessageBeep" stdcall: MessageBoxStyle.flags -> int;
 
     fun MessageBeep uType =
       if C_MessageBeep uType = 0 then raise Fail "MessageBeep"

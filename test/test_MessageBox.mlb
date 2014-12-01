@@ -1,0 +1,6 @@
+ann "allowFFI true" in
+  ../win32.mlb
+  test_MessageBox.sml
+  test_runner.sml
+end
+

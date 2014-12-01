@@ -8,4 +8,3 @@ ann "allowFFI true" in
 	win32.sml
 end
 
-
