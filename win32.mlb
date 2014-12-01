@@ -4,7 +4,7 @@ ann "allowFFI true" in
 	$(SML_LIB)/basis/mlton.mlb
 	$(SML_LIB)/basis/c-types.mlb
 	dynlink.sml
+	MessageBox.sig
 	MessageBox.sml
-	win32.sml
 end
 
