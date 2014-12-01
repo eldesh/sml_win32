@@ -6,5 +6,11 @@ ann "allowFFI true" in
 	dynlink.sml
 	MessageBox.sig
 	MessageBox.sml
+	Handle.sig
+	Handle.sml
+	Base.sml
+	WinBase.sml
+	Window.sig
+	Window.sml
 end
 
