@@ -20,8 +20,6 @@
 structure Window : WINDOW =
 struct
 local
-    type RECT      = { left: int, top: int, right: int, bottom: int }
-    type POINT     = { x: int, y: int }
 (*
     open CInterface
     open Globals

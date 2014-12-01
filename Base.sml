@@ -72,18 +72,22 @@ in
         mkConversion (checkResult o fromCbool)
             (fn () => raise OS.SysErr("SUCCESSSTATE", NONE)) bool
     end
+    *)
 
     type POINT = { x: int, y: int }
 
+    (*
     local
         fun breakPoint ({x,y}: POINT) = (x,y)
         fun mkPoint (x,y): POINT = {x=x, y=y}
     in
         val POINT = absConversion {abs=mkPoint, rep=breakPoint} (STRUCT2 (LONG,LONG))
     end
+    *)
 
     type RECT =  { left: int, top: int, right: int, bottom: int }
 
+    (*
     local
         fun breakRect ({left,top,right,bottom}: RECT) = (left,top,right,bottom)
         fun mkRect (left,top,right,bottom): RECT =
@@ -91,8 +95,10 @@ in
     in
         val RECT = absConversion {abs=mkRect, rep=breakRect} (STRUCT4 (LONG,LONG,LONG,LONG))
     end
+    *)
 
     type SIZE = { cx: int, cy: int }
+    (*
     local
         fun breakSize ({cx,cy}: SIZE) = (cx,cy)
         fun mkSize (cx,cy): SIZE = {cx=cx, cy=cy}
