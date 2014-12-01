@@ -233,30 +233,71 @@ in
     |   GW_HWNDPREV
     |   GW_OWNER
 
-      (*
+    val C_GetWindow =
+      _import "GetWindow" stdcall
+      : C_Pointer.t * word -> C_Pointer.t;
+
+    val C_GetNextWindow =
+      _import "GetNextWindow" stdcall
+      : C_Pointer.t * word -> C_Pointer.t;
+
     local
-        fun winFlag GW_HWNDFIRST        = 0
-        |   winFlag GW_HWNDLAST         = 1
-        |   winFlag GW_HWNDNEXT         = 2
-        |   winFlag GW_HWNDPREV         = 3
-        |   winFlag GW_OWNER            = 4
-        |   winFlag GW_CHILD            = 5
+      fun winFlag GW_HWNDFIRST = 0w0
+        | winFlag GW_HWNDLAST  = 0w1
+        | winFlag GW_HWNDNEXT  = 0w2
+        | winFlag GW_HWNDPREV  = 0w3
+        | winFlag GW_OWNER     = 0w4
+        | winFlag GW_CHILD     = 0w5
     in
-        fun GetWindow (win, gwFlag) =
-            call2 (user "GetWindow") (HWND,INT) HWNDOPT (win, winFlag gwFlag)
-        (* Only GW_HWNDNEXT and GW_HWNDPREV are allowed here but it's probably not
-           worth making it a special case. *)
-        fun GetNextWindow(win: HWND, gwFlag) =
-            checkWindow (
-                call2 (user "GetNextWindow") (HWND,INT) HWND (win, winFlag gwFlag))
+      fun GetWindow (win, gwFlag) =
+      let
+        val hwnd = (C_GetWindow (Handle.ptrOfHandle win, winFlag gwFlag))
+      in
+        if hwnd = C_Pointer.null
+        then NONE
+        else SOME (Handle.handleOfPtr hwnd)
+      end
+
+      fun GetNextWindow (win, gwFlag) =
+        Handle.handleOfPtr (C_GetNextWindow (Handle.ptrOfHandle win, winFlag gwFlag))
     end
 
-    val IsChild                = call2 (user "IsChild") (HWND,HWND) BOOL
-    val IsIconic               = call1 (user "IsIconic") (HWND) BOOL
-    val IsWindow               = call1 (user "IsWindow") (HWND) BOOL
-    val IsWindowVisible        = call1 (user "IsWindowVisible") (HWND) BOOL
-    val IsZoomed               = call1 (user "IsZoomed") (HWND) BOOL
+    val C_IsChild =
+      _import "IsChild" stdcall
+      : C_Pointer.t * C_Pointer.t -> int;
 
+    val C_IsIconic =
+      _import "IsIconic" stdcall
+      : C_Pointer.t -> int;
+
+    val C_IsWindow =
+      _import "IsWindow" stdcall
+      : C_Pointer.t -> int;
+
+    val C_IsWindowVisible =
+      _import "IsWindowVisible" stdcall
+      : C_Pointer.t -> int;
+
+    val C_IsZoomed =
+      _import "IsZoomed" stdcall
+      : C_Pointer.t -> int;
+
+    fun IsChild (hWndParent, hWnd) =
+      C_IsChild (Handle.ptrOfHandle hWndParent, Handle.ptrOfHandle hWnd) <> 0
+
+    fun IsIconic hWnd =
+      C_IsIconic (Handle.ptrOfHandle hWnd) <> 0
+
+    fun IsWindow hWnd =
+      C_IsWindow (Handle.ptrOfHandle hWnd) <> 0
+
+    fun IsWindowVisible hWnd =
+      C_IsWindowVisible (Handle.ptrOfHandle hWnd) <> 0
+
+    fun IsZoomed hWnd =
+      C_IsZoomed (Handle.ptrOfHandle hWnd) <> 0
+
+      (*
     fun GetClientRect(hWnd: HWND): RECT =
     let
         val buff = alloc 4 Clong

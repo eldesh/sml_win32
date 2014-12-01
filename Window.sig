@@ -120,25 +120,23 @@ sig
     val GetDesktopWindow : unit -> HWND
     val GetForegroundWindow : unit -> HWND
     val GetLastActivePopup : HWND -> HWND
-	(*
     val GetNextWindow : HWND * GetWindowFlags -> HWND
-	*)
     val GetParent : HWND -> HWND option
     val GetTopWindow : HWND option -> HWND option
-	(*
     val GetWindow : HWND * GetWindowFlags -> HWND option
+	(*
     val GetWindowContextHelpId : HWND -> int
     val GetWindowLong : HWND * int -> int
     val GetWindowRect : HWND -> RECT
 	*)
     val GetWindowText : HWND -> string
     val GetWindowTextLength : HWND -> int
-	(*
     val IsChild : HWND * HWND -> bool
     val IsIconic : HWND -> bool
     val IsWindow : HWND -> bool
     val IsWindowVisible : HWND -> bool
     val IsZoomed : HWND -> bool
+	(*
     val MoveWindow : {x: int, y: int, hWnd: HWND, width: int, height: int, repaint: bool} -> unit
     val OpenIcon : HWND -> unit
     val SetForegroundWindow : HWND -> bool
