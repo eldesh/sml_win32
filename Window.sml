@@ -295,27 +295,45 @@ in
     fun IsZoomed hWnd =
       C_IsZoomed (Handle.ptrOfHandle hWnd) <> 0
 
+    val C_GetClientRect =
+      _import "GetClientRect" stdcall
+      : C_Pointer.t * C_SLong.t array -> int;
+
+    val C_GetWindowRect =
+      _import "GetWindowRect" stdcall
+      : C_Pointer.t * C_SLong.t array -> int;
+
+    local
+      val sub = Array.sub
+    in
+      fun GetClientRect hWnd =
+      let
+        val rect = Array.array (4, 0)
+      in
+        if C_GetClientRect (Handle.ptrOfHandle hWnd, rect) = 0
+        then { left  =sub(rect,0)
+             , top   =sub(rect,1)
+             , right =sub(rect,2)
+             , bottom=sub(rect,3)
+             }
+        else raiseSysErr ()
+      end
+
+      fun GetWindowRect hWnd =
+      let
+        val rect = Array.array (4, 0)
+      in
+        if C_GetWindowRect (Handle.ptrOfHandle hWnd, rect) = 0
+        then { left  =sub(rect,0)
+             , top   =sub(rect,1)
+             , right =sub(rect,2)
+             , bottom=sub(rect,3)
+             }
+        else raiseSysErr ()
+      end
+    end
+
       (*
-    fun GetClientRect(hWnd: HWND): RECT =
-    let
-        val buff = alloc 4 Clong
-        val res = call2 (user "GetClientRect") (HWND, POINTER) BOOL (hWnd, address buff)
-        val (toRect,_,_) = breakConversion RECT
-    in
-        checkResult res;
-        toRect buff
-    end
-
-    fun GetWindowRect(hWnd: HWND): RECT =
-    let
-        val buff = alloc 4 Clong
-        val res = call2 (user "GetWindowRect") (HWND, POINTER) BOOL (hWnd, address buff)
-        val (toRect,_,_) = breakConversion RECT
-    in
-        checkResult res;
-        toRect buff
-    end
-
     fun AdjustWindowRect(rect: RECT, style: Style.flags, bMenu: bool): RECT =
     let
         val (toRect,fromRect,_) = breakConversion RECT

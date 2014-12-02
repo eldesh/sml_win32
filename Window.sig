@@ -114,9 +114,7 @@ sig
     val FindWindow: string * string option -> HWND
     val FindWindowEx: HWND option * HWND option * string * string option -> HWND
     val GetClassName : HWND -> string
-	(*
     val GetClientRect : HWND -> RECT
-	*)
     val GetDesktopWindow : unit -> HWND
     val GetForegroundWindow : unit -> HWND
     val GetLastActivePopup : HWND -> HWND
@@ -127,8 +125,8 @@ sig
 	(*
     val GetWindowContextHelpId : HWND -> int
     val GetWindowLong : HWND * int -> int
-    val GetWindowRect : HWND -> RECT
 	*)
+    val GetWindowRect : HWND -> RECT
     val GetWindowText : HWND -> string
     val GetWindowTextLength : HWND -> int
     val IsChild : HWND * HWND -> bool
