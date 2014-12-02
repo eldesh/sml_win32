@@ -35,6 +35,7 @@ sig
         include BIT_FLAGS
         val MB_ABORTRETRYIGNORE : flags
         val MB_APPLMODAL : flags
+        val MB_CANCELTRYCONTINUE : flags
         val MB_DEFAULT_DESKTOP_ONLY : flags
         val MB_DEFBUTTON1 : flags
         val MB_DEFBUTTON2 : flags
@@ -64,6 +65,12 @@ sig
         val MB_USERICON : flags
         val MB_YESNO : flags
         val MB_YESNOCANCEL : flags
+
+        val MB_TYPEMASK : flags
+        val MB_ICONMASK : flags
+        val MB_DEFMASK  : flags
+        val MB_MODEMASK : flags
+        val MB_MISCMASK : flags
       end
 
     val MessageBox : HWND option * string * string * MessageBoxStyle.flags -> int

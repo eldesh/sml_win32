@@ -38,6 +38,7 @@ in
         val MB_YESNOCANCEL              = 0wx00000003
         val MB_YESNO                    = 0wx00000004
         val MB_RETRYCANCEL              = 0wx00000005
+        val MB_CANCELTRYCONTINUE        = 0wx00000006
 
         val MB_ICONHAND                 = 0wx00000010
         val MB_ICONQUESTION             = 0wx00000020
@@ -71,8 +72,14 @@ in
         val MB_SERVICE_NOTIFICATION          = 0wx00200000
         val MB_SERVICE_NOTIFICATION_NT3X     = 0wx00040000
 
+        val MB_TYPEMASK                 = 0wx0000000F
+        val MB_ICONMASK                 = 0wx000000F0
+        val MB_DEFMASK                  = 0wx00000F00
+        val MB_MODEMASK                 = 0wx00003000
+        val MB_MISCMASK                 = 0wx0000C000
+
         val all = flags[MB_OK, MB_OKCANCEL, MB_ABORTRETRYIGNORE, MB_YESNOCANCEL,
-                        MB_YESNO, MB_RETRYCANCEL, MB_ICONHAND, MB_ICONQUESTION, 
+                        MB_YESNO, MB_RETRYCANCEL, MB_CANCELTRYCONTINUE, MB_ICONHAND, MB_ICONQUESTION, 
                         MB_ICONEXCLAMATION, MB_ICONASTERISK, MB_USERICON, MB_DEFBUTTON1,
                         MB_DEFBUTTON2, MB_DEFBUTTON3, MB_DEFBUTTON4, MB_APPLMODAL, 
                         MB_SYSTEMMODAL, MB_TASKMODAL, MB_HELP, MB_NOFOCUS, MB_SETFOREGROUND, 
