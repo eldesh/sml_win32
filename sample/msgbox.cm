@@ -1,0 +1,7 @@
+library
+  library(../win32/nlffi-generated.cm)
+is
+  $/basis.cm
+  $c/c.cm
+  ../win32/nlffi-generated.cm
+  msgbox.sml
