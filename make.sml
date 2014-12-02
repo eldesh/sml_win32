@@ -4,7 +4,8 @@
  *)
 
 val ret =
-  if CM.make "win32/nlffi-generated.cm"
+  if CM.make "user32/nlffi-generated.cm" andalso
+     CM.make "kernel32/nlffi-generated.cm"
   then OS.Process.success before print "load success\n"
   else OS.Process.failure before print "load failure\n"
 
