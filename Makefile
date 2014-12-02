@@ -1,15 +1,16 @@
 
-all: user32/nlffi-generated.cm kernel32/nlffi-generated.cm
+MODULES := user32 kernel32
+FFICMS := $(MODULES:=/nlffi-generated.cm)
+
+all: $(FFICMS)
 
 
-user32/nlffi-generated.cm: user32/libh.sml include/user32.h
-	@cmd /C 'ml-nlffigen -dir user32 -include libh.sml include/user32.h'
+%/nlffi-generated.cm: %/libh.sml include/%.h
+	@echo " [FFIGen] $(patsubst %/,%,$(dir $@))"
+	@cmd /C 'ml-nlffigen -dir $(patsubst %/,%,$(dir $@)) -include libh.sml include/$(patsubst %/,%,$(dir $@)).h'
 
 
-kernel32/nlffi-generated.cm: kernel32/libh.sml include/kernel32.h
-	@cmd /C 'ml-nlffigen -dir kernel32 -include libh.sml include/kernel32.h'
-
-
+.SECONDARY: $(MODULES:=/libh.sml)
 %/libh.sml: libh.sml.in
 	@mkdir -p $(dir $@)
 	@sed -e "s|@SHARED_LIB@|$(patsubst %/,%,$(dir $@)).dll|" $< > $@
@@ -17,7 +18,9 @@ kernel32/nlffi-generated.cm: kernel32/libh.sml include/kernel32.h
 
 .PHONY: test
 test: all
-	cmd /C 'sml make.sml'
+	@for cm in $(FFICMS); do \
+		cmd /C "sml make.sml $${cm}"; \
+	 done
 
 
 .PHONY: clean

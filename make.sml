@@ -2,12 +2,13 @@
 (**
  * load ffi generated test
  *)
+val (name, [fficm]) = (CommandLine.name(), CommandLine.arguments())
+val () = print(concat["name: ", name, "\n"])
 
 val ret =
-  if CM.make "user32/nlffi-generated.cm" andalso
-     CM.make "kernel32/nlffi-generated.cm"
-  then OS.Process.success before print "load success\n"
-  else OS.Process.failure before print "load failure\n"
+  if CM.make fficm
+  then OS.Process.success before print(concat["  [PASS] ", fficm, "\n"])
+  else OS.Process.failure before print(concat["  [FAIL] ", fficm, "\n"])
 
 val () = OS.Process.exit ret;
 
