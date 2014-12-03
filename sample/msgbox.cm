@@ -1,7 +1,6 @@
-library
-  library(../win32/nlffi-generated.cm)
+group
 is
   $/basis.cm
   $c/c.cm
-  ../win32/nlffi-generated.cm
+  ../user32/nlffi-generated.cm
   msgbox.sml

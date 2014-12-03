@@ -1,5 +1,10 @@
-structure ZS = ZString;
-val null = C.Ptr.null (C.T.pointer C.T.sint);
-fun msgbox() = 
-  F_MessageBoxA.f (Unsafe.cast null, ZS.dupML "ã©ã†ã—ã¾ã™ã‹ï¼Ÿ", ZS.dupML
-  "ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹ã®ãƒ‡ãƒ¢", 0wx04);
+
+structure Msgbox =
+struct
+  structure ZS = ZString
+  val null = C.Ptr.null (C.T.pointer C.T.sint)
+  fun msgbox() = 
+    F_MessageBoxA.f (Unsafe.cast null, ZS.dupML "‚Ç‚¤‚µ‚Ü‚·‚©H", ZS.dupML
+    "ƒƒbƒZ[ƒWƒ{ƒbƒNƒX‚Ìƒfƒ‚", 0wx04)
+end
+
