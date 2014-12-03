@@ -25,9 +25,7 @@ test: all
 
 .PHONY: clean
 clean:
-	rm -rf user32
-	rm -rf kernel32
-	rm -rf user32/libh.sml
-	rm -rf kernel32/libh.sml
+	rm -rf $(MODULES)
+	rm -rf $(addsuffix /libh.sml, $(MODULES))
 	find . -name .cm -type d | xargs rm -rf
 
