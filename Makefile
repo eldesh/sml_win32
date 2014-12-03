@@ -15,6 +15,11 @@ all: $(FFICMS)
 	@mkdir -p $(dir $@)
 	@sed -e "s|@SHARED_LIB@|$(patsubst %/,%,$(dir $@)).dll|" $< > $@
 
+#
+#%/libh.sml: libh.sml.in
+#	@mkdir -p $(dir $@)
+#	@sed -e "s|lib.*=.*@SHARED_LIB@.*|lib = DynLinkage.main_lib|" $< > $@
+#
 
 .PHONY: test test_load
 test_load: all

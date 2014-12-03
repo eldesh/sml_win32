@@ -48,5 +48,7 @@ LPTSTR WINAPI lstrcat(
   _In_     LPTSTR lpString2
 );
 
+LPTSTR WINAPI GetCommandLineA(void);
+
 #endif    /* WINAPI_KERNEL32_INCLUDED */
 

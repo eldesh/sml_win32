@@ -50,5 +50,10 @@ typedef TCHAR *LPTSTR, *LPTCH;
 // http://msdn.microsoft.com/en-us/library/windows/desktop/aa383751%28v=vs.85%29.aspx
 typedef LPCSTR LPCTSTR;
 
+typedef PVOID  HANDLE;
+typedef HANDLE HBITMAP;
+typedef HANDLE HBRUSH;
+typedef HANDLE HINSTANCE;
+
 #endif    /* WINAPI_WINTYPE_INCLUDED */
 
