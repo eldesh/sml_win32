@@ -1,0 +1,8 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/mlnlffi-lib/internals/c-int.mlb
+in
+  ../mluser32/nlffi-generated.mlb
+  msgbox.sml
+  main.sml
+end
