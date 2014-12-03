@@ -1,0 +1,7 @@
+library
+  structure Test
+is
+  $/basis.cm
+  $c/c.cm
+  ../kernel32/nlffi-generated.cm
+  strcpy.sml

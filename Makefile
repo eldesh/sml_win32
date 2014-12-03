@@ -16,11 +16,15 @@ all: $(FFICMS)
 	@sed -e "s|@SHARED_LIB@|$(patsubst %/,%,$(dir $@)).dll|" $< > $@
 
 
-.PHONY: test
-test: all
+.PHONY: test test_load
+test_load: all
 	@for cm in $(FFICMS); do \
 		cmd /C "sml make.sml $${cm}"; \
 	 done
+
+test: all test_load
+	cmd /C 'cd test & ml-build strcpy.cm Test.main strcpy'
+	cmd /C 'cd test & sml @SMLload=strcpy.x86-win32'
 
 
 .PHONY: clean
