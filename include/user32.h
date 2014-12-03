@@ -12,6 +12,7 @@
 #define _In_
 #define _In_
 #define _Out_
+#define _Inout_
 
 // Windows7
 // http://msdn.microsoft.com/en-us/library/windows/desktop/aa383745%28v=vs.85%29.aspx

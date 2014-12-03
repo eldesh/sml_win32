@@ -8,6 +8,7 @@
 #define _In_
 #define _In_
 #define _Out_
+#define _Inout_
 
 
 // Windows7
@@ -27,10 +28,24 @@ lstrcpyA(
     __in  LPCSTR lpString2
     );
 
-
 LPTSTR WINAPI lstrcpy(
   _Out_  LPTSTR lpString1,
   _In_   LPTSTR lpString2
+);
+
+int WINAPI lstrlen(
+  _In_  LPCTSTR lpString
+);
+
+LPTSTR WINAPI lstrcpyn(
+  _Out_  LPTSTR lpString1,
+  _In_   LPCTSTR lpString2,
+  _In_   int iMaxLength
+);
+
+LPTSTR WINAPI lstrcat(
+  _Inout_  LPTSTR lpString1,
+  _In_     LPTSTR lpString2
 );
 
 #endif    /* WINAPI_KERNEL32_INCLUDED */
