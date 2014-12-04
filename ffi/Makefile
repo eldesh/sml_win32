@@ -24,7 +24,7 @@ all: $(FFICMS)
 .PHONY: test test_load
 test_load: all
 	@for cm in $(FFICMS); do \
-		cmd /C "sml make.sml $${cm}"; \
+		cmd /C "sml test/make.sml $${cm}"; \
 	 done
 
 test: all test_load

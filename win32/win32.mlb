@@ -3,7 +3,7 @@ ann "allowFFI true" in
 	$(SML_LIB)/basis/basis.mlb
 	$(SML_LIB)/basis/mlton.mlb
 	$(SML_LIB)/basis/c-types.mlb
-	dynlink.sml
+	../ffi/dynlink.sml
 	MessageBox.sig
 	MessageBox.sml
 	Handle.sig
