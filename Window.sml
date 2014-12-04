@@ -471,10 +471,11 @@ in
     in
         Message.messageReturnFromParams(msg, wParam, lParam, res)
     end
-    
+    *)
 
     val CW_USEDEFAULT = ~0x80000000 (* Default value for size and/ot position. *)
 
+    (*
     fun DestroyWindow(hWnd: HWND) =
     (
         call1 (user "DestroyWindow") (HWND) (SUCCESSSTATE "DestroyWindow") hWnd;
