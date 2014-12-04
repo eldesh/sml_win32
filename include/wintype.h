@@ -56,7 +56,10 @@ typedef PVOID  HANDLE;
 typedef HANDLE HBITMAP;
 typedef HANDLE HBRUSH;
 typedef HANDLE HINSTANCE;
+typedef HANDLE HMENU;
 typedef HINSTANCE HMODULE;
+
+typedef int BOOL;
 
 typedef unsigned long DWORD;
 typedef uint64_t DWORDLONG;
