@@ -2,9 +2,6 @@
 StandardML Win32 API binding
 ===============================================
 
-port from [Poly/ML Windows programming interface](http://www.polyml.org/docs/Windows.html) .
-
-
 ## prerequisites
 
 - Windows (>= 7) 32bit
@@ -27,6 +24,11 @@ When you test win32 library,
 ```
 $ mlton win32.mlb
 ```
+
+
+## originate
+
+some part of code is port from [Poly/ML Windows programming interface](http://www.polyml.org/docs/Windows.html) .
 
 
 ## link
