@@ -1,0 +1,23 @@
+
+MODULES := user32 kernel32
+FFIMLBS := $(MODULES:=/nlffi-generated.mlb)
+
+all: $(FFIMLBS)
+
+
+%/nlffi-generated.mlb: %/libh.sml include/%.h
+	@echo " [FFIGen] $(patsubst %/,%,$(dir $@))"
+	@mlnlffigen -dir $(patsubst %/,%,$(dir $@)) -include libh.sml include/$(patsubst %/,%,$(dir $@)).h
+
+
+.SECONDARY: $(MODULES:=/libh.sml)
+%/libh.sml: libh.sml.in
+	@mkdir -p $(dir $@)
+	@sed -e "s|@SHARED_LIB@|$(patsubst %/,%,$(dir $@)).dll|" $< > $@
+
+
+.PHONY: clean
+clean:
+	rm -rf $(MODULES)
+	rm -rf $(addsuffix /libh.sml, $(MODULES))
+
