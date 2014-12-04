@@ -2,6 +2,12 @@
 StandardML Win32 API binding
 ===============================================
 
+
+## status
+
+This library is in very early stage pre alpha version.
+
+
 ## prerequisites
 
 - Windows (>= 7) 32bit
@@ -22,7 +28,7 @@ Add reference to win32.mlb file.
 When you test win32 library,
 
 ```
-$ mlton win32.mlb
+$ cd win32 && mlton win32.mlb
 ```
 
 
