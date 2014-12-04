@@ -38,7 +38,8 @@ in
     open WinBase (* Get Style and SetWindowPositionStyle *)
 
     datatype ShowWindowOptions =
-        SW_HIDE
+        SW_FORCEMINIMIZE
+    |   SW_HIDE
     |   SW_MAXIMIZE
     |   SW_MINIMIZE
     |   SW_RESTORE
@@ -74,6 +75,7 @@ in
             |   SW_SHOWNA           => 8
             |   SW_RESTORE          => 9
             |   SW_SHOWDEFAULT      => 10
+            |   SW_FORCEMINIMIZE    => 11
     in
       C_ShowWindow (Handle.ptrOfHandle win, cmd) <> 0
     end

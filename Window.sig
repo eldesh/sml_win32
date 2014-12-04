@@ -49,7 +49,8 @@ sig
         |   SWP_OTHER of int
 
     datatype ShowWindowOptions =
-        SW_HIDE
+        SW_FORCEMINIMIZE
+    |   SW_HIDE
     |   SW_MAXIMIZE
     |   SW_MINIMIZE
     |   SW_RESTORE
