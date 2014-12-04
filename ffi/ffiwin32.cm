@@ -1,6 +1,7 @@
 library
   library(kernel32/nlffi-generated.cm)
   library(user32/nlffi-generated.cm)
+  library($c/internals/c-int.cm)
 is
   $/basis.cm
   $c/internals/c-int.cm

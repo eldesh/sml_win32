@@ -32,6 +32,10 @@ MessageBoxA(
     __in_opt LPCSTR lpCaption,
     __in UINT uType);
 
+BOOL WINAPI MessageBeep(
+  _In_  UINT uType
+);
+
 /*
 HWND WINAPI CreateWindowA(
   _In_opt_  LPCTSTR lpClassName,

@@ -1,79 +1,74 @@
-(*
-    Copyright (c) 2001
-        David C.J. Matthews
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-    
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-    
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*)
 signature MESSAGE_BOX =
 sig
-    type HWND
+  type HWND
 
-    val IDABORT : int
-    val IDCANCEL : int
-    val IDCLOSE : int
-    val IDHELP : int
-    val IDIGNORE : int
-    val IDNO : int
-    val IDOK : int
-    val IDRETRY : int
-    val IDYES : int
+  structure MessageBoxStyle :
+  sig
+    include BIT_FLAGS
+    type t = flags
+    val MB_ABORTRETRYIGNORE : t
+    val MB_APPLMODAL : t
+    val MB_CANCELTRYCONTINUE : t
+    val MB_DEFAULT_DESKTOP_ONLY : t
+    val MB_DEFBUTTON1 : t
+    val MB_DEFBUTTON2 : t
+    val MB_DEFBUTTON3 : t
+    val MB_DEFBUTTON4 : t
+    val MB_HELP : t
+    val MB_ICONASTERISK : t
+    val MB_ICONERROR : t
+    val MB_ICONEXCLAMATION : t
+    val MB_ICONHAND : t
+    val MB_ICONINFORMATION : t
+    val MB_ICONQUESTION : t
+    val MB_ICONSTOP : t
+    val MB_ICONWARNING : t
+    val MB_NOFOCUS : t
+    val MB_OK : t
+    val MB_OKCANCEL : t
+    val MB_RETRYCANCEL : t
+    val MB_RIGHT : t
+    val MB_RTLREADING : t
+    val MB_SERVICE_NOTIFICATION : t
+    val MB_SERVICE_NOTIFICATION_NT3X : t
+    val MB_SETFOREGROUND : t
+    val MB_SYSTEMMODAL : t
+    val MB_TASKMODAL : t
+    val MB_TOPMOST : t
+    val MB_USERICON : t
+    val MB_YESNO : t
+    val MB_YESNOCANCEL : t
 
-    structure MessageBoxStyle :
-      sig
-        include BIT_FLAGS
-        val MB_ABORTRETRYIGNORE : flags
-        val MB_APPLMODAL : flags
-        val MB_CANCELTRYCONTINUE : flags
-        val MB_DEFAULT_DESKTOP_ONLY : flags
-        val MB_DEFBUTTON1 : flags
-        val MB_DEFBUTTON2 : flags
-        val MB_DEFBUTTON3 : flags
-        val MB_DEFBUTTON4 : flags
-        val MB_HELP : flags
-        val MB_ICONASTERISK : flags
-        val MB_ICONERROR : flags
-        val MB_ICONEXCLAMATION : flags
-        val MB_ICONHAND : flags
-        val MB_ICONINFORMATION : flags
-        val MB_ICONQUESTION : flags
-        val MB_ICONSTOP : flags
-        val MB_ICONWARNING : flags
-        val MB_NOFOCUS : flags
-        val MB_OK : flags
-        val MB_OKCANCEL : flags
-        val MB_RETRYCANCEL : flags
-        val MB_RIGHT : flags
-        val MB_RTLREADING : flags
-        val MB_SERVICE_NOTIFICATION : flags
-        val MB_SERVICE_NOTIFICATION_NT3X : flags
-        val MB_SETFOREGROUND : flags
-        val MB_SYSTEMMODAL : flags
-        val MB_TASKMODAL : flags
-        val MB_TOPMOST : flags
-        val MB_USERICON : flags
-        val MB_YESNO : flags
-        val MB_YESNOCANCEL : flags
+    val MB_TYPEMASK : t
+    val MB_ICONMASK : t
+    val MB_DEFMASK  : t
+    val MB_MODEMASK : t
+    val MB_MISCMASK : t
+  end
 
-        val MB_TYPEMASK : flags
-        val MB_ICONMASK : flags
-        val MB_DEFMASK  : flags
-        val MB_MODEMASK : flags
-        val MB_MISCMASK : flags
-      end
+  (**
+   * for MessageBeep
+   *)
+  val BEEP_SIMPLE : MessageBoxStyle.t
 
-    val MessageBox : HWND option * string * string * MessageBoxStyle.flags -> int
-    val MessageBeep: MessageBoxStyle.flags -> unit
+  structure Result :
+  sig
+    datatype t = IDOK
+               | IDCANCEL
+               | IDABORT
+               | IDRETRY
+               | IDIGNORE
+               | IDYES
+               | IDNO
+               | IDCLOSE
+               | IDHELP
+
+    val toInt : t -> int
+    val fromInt : int -> t option
+  end
+
+  val MessageBox : HWND option * string * string * MessageBoxStyle.t -> Result.t
+  val MessageBeep: MessageBoxStyle.t -> bool
 end
 

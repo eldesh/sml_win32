@@ -1,0 +1,9 @@
+library
+  signature MESSAGE_BOX
+  structure MessageBox
+is
+  $/basis.cm
+  ../ffi/ffiwin32.cm
+  MessageBox.sig
+  MessageBox.sml
+
