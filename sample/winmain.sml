@@ -12,7 +12,7 @@ struct
     val hwnd = F_CreateWindowExA.f'
                 ( 0w0
                 , `"STATIC"
-                , `"Kitty on your lap"
+                , `"Create-Window-ExA"
                 , WS_CAPTION
                 , 100, 100, 200, 200
                 , C.Ptr.null'
