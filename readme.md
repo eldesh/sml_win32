@@ -41,6 +41,8 @@ $ cd win32 && mlton win32.mlb
 $ cd sample/
 $ ml-build msgbox.cm Msgbox.main msgbox
 $ sml.bat @SMLload=msgbox.x86-win32
+$ ml-build winmain.cm WinMain.main winmain
+$ sml.bat @SMLload=winmain.x86-win32
 ```
 
 
@@ -48,8 +50,11 @@ $ sml.bat @SMLload=msgbox.x86-win32
 
 
 ```
+$ cd sample/
 $ mlton msgbox.mlb
 $ ./msgbox
+$ mlton winmain.mlb
+$ ./winmain
 ```
 
 ## originate
