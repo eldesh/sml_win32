@@ -61,7 +61,7 @@ struct
             type flags = SysWord.word
             fun toWord f = f
             fun fromWord f = f
-            val flags = List.foldl (fn (a, b) => SysWord.orb(a,b)) 0w0
+            val flags = List.foldl SysWord.orb 0w0
             fun allSet (fl1, fl2) = SysWord.andb(fl1, fl2) = fl1
             fun anySet (fl1, fl2) = SysWord.andb(fl1, fl2) <> 0w0
             fun clear (fl1, fl2) = SysWord.andb(SysWord.notb fl1, fl2)
@@ -124,7 +124,7 @@ struct
             type flags = SysWord.word
             fun toWord f = f
             fun fromWord f = f
-            val flags = List.foldl (fn (a, b) => SysWord.orb(a,b)) 0w0
+            val flags = List.foldl SysWord.orb 0w0
             fun allSet (fl1, fl2) = SysWord.andb(fl1, fl2) = fl1
             fun anySet (fl1, fl2) = SysWord.andb(fl1, fl2) <> 0w0
             fun clear (fl1, fl2) = SysWord.andb(SysWord.notb fl1, fl2)
