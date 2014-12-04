@@ -32,6 +32,26 @@ $ cd win32 && mlton win32.mlb
 ```
 
 
+## sample
+
+### SML/NJ
+
+
+```
+$ cd sample/
+$ ml-build msgbox.cm Msgbox.main msgbox
+$ sml.bat @SMLload=msgbox.x86-win32
+```
+
+
+### MLton
+
+
+```
+$ mlton msgbox.mlb
+$ ./msgbox
+```
+
 ## originate
 
 some part of code is port from [Poly/ML Windows programming interface](http://www.polyml.org/docs/Windows.html) .
