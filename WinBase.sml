@@ -117,6 +117,8 @@ struct
             and WS_EX_RTLREADING: flags and WS_EX_LTRREADING: flags and WS_EX_LEFTSCROLLBAR: flags
             and WS_EX_RIGHTSCROLLBAR: flags and WS_EX_CONTROLPARENT: flags and WS_EX_STATICEDGE: flags
             and WS_EX_APPWINDOW: flags and WS_EX_OVERLAPPEDWINDOW: flags and WS_EX_PALETTEWINDOW: flags
+            and WS_EX_LAYERED: flags and WS_EX_NOINHERITLAYOUT: flags and WS_EX_NOREDIRECTIONBITMAP: flags
+            and WS_EX_LAYOUTRTL: flags and WS_EX_COMPOSITED: flags and WS_EX_NOACTIVATE: flags
         end =
         struct
             type flags = SysWord.word
@@ -147,8 +149,14 @@ struct
             val WS_EX_CONTROLPARENT                          = 0wx00010000
             val WS_EX_STATICEDGE                             = 0wx00020000
             val WS_EX_APPWINDOW                              = 0wx00040000
-        
-        
+
+            val WS_EX_LAYERED                                = 0wx00080000
+            val WS_EX_NOINHERITLAYOUT                        = 0wx00100000
+            val WS_EX_NOREDIRECTIONBITMAP                    = 0wx00200000
+            val WS_EX_LAYOUTRTL                              = 0wx00400000
+            val WS_EX_COMPOSITED                             = 0wx02000000
+            val WS_EX_NOACTIVATE                             = 0wx08000000
+
             val WS_EX_OVERLAPPEDWINDOW = flags[WS_EX_WINDOWEDGE, WS_EX_CLIENTEDGE]
             val WS_EX_PALETTEWINDOW = flags[WS_EX_WINDOWEDGE, WS_EX_TOOLWINDOW, WS_EX_TOPMOST]
 
@@ -156,7 +164,8 @@ struct
                             WS_EX_TRANSPARENT, WS_EX_MDICHILD, WS_EX_TOOLWINDOW, WS_EX_WINDOWEDGE,
                             WS_EX_CLIENTEDGE, WS_EX_CONTEXTHELP, WS_EX_RIGHT, WS_EX_LEFT, WS_EX_RTLREADING,
                             WS_EX_LTRREADING, WS_EX_LEFTSCROLLBAR, WS_EX_RIGHTSCROLLBAR, WS_EX_CONTROLPARENT,
-                            WS_EX_STATICEDGE, WS_EX_APPWINDOW]
+                            WS_EX_STATICEDGE, WS_EX_APPWINDOW, WS_EX_LAYERED, WS_EX_NOINHERITLAYOUT,
+                            WS_EX_NOREDIRECTIONBITMAP, WS_EX_LAYOUTRTL, WS_EX_COMPOSITED, WS_EX_NOACTIVATE]
     
             val intersect = List.foldl (fn (a, b) => SysWord.andb(a,b)) all
         end

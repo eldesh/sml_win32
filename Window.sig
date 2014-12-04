@@ -28,6 +28,8 @@ sig
         and WS_EX_RTLREADING: flags and WS_EX_LTRREADING: flags and WS_EX_LEFTSCROLLBAR: flags
         and WS_EX_RIGHTSCROLLBAR: flags and WS_EX_CONTROLPARENT: flags and WS_EX_STATICEDGE: flags
         and WS_EX_APPWINDOW: flags and WS_EX_OVERLAPPEDWINDOW: flags and WS_EX_PALETTEWINDOW: flags
+        and WS_EX_LAYERED: flags and WS_EX_NOINHERITLAYOUT: flags and WS_EX_NOREDIRECTIONBITMAP: flags
+        and WS_EX_LAYOUTRTL: flags and WS_EX_COMPOSITED: flags and WS_EX_NOACTIVATE: flags
     end
 
     datatype WindowPositionStyle =
@@ -90,7 +92,9 @@ sig
     val AdjustWindowRectEx :  RECT * Style.flags * bool * int -> RECT
     val ArrangeIconicWindows : HWND -> int
     val BringWindowToTop : HWND -> unit
+    *)
     val CW_USEDEFAULT : int
+    (*
     val ChildWindowFromPoint : HWND * POINT -> HWND option
 	*)
     val CloseWindow : HWND -> unit
