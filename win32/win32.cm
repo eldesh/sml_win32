@@ -6,4 +6,6 @@ is
   ../ffi/ffiwin32.cm
   MessageBox.sig
   MessageBox.sml
+  Class.sig
+  Class.sml
 

@@ -1,16 +1,10 @@
 
 ann "allowFFI true" in
 	$(SML_LIB)/basis/basis.mlb
-	$(SML_LIB)/basis/mlton.mlb
-	$(SML_LIB)/basis/c-types.mlb
-	../ffi/dynlink.sml
+	../ffi/ffiwin32.mlb
 	MessageBox.sig
 	MessageBox.sml
-	Handle.sig
-	Handle.sml
-	Base.sml
-	WinBase.sml
-	Window.sig
-	Window.sml
+	Class.sig
+	Class.sml
 end
 
