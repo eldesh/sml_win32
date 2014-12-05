@@ -1,0 +1,9 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/mlnlffi-lib/mlnlffi-lib.mlb
+in
+  $(SML_LIB)/mlnlffi-lib/c.mlb
+  kernel32/nlffi-generated.mlb
+  user32/nlffi-generated.mlb
+end
+
