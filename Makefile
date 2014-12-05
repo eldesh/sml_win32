@@ -1,11 +1,18 @@
 
+FFIWIN32 := ffiwin32/.cm
+WIN32    := win32/.cm
 
-all: win32binding
+
+all: $(WIN32)
 
 
-.PHONY: win32binding
-win32binding:
+$(FFIWIN32):
 	make -C ffi
+
+
+$(WIN32): $(FFIWIN32)
+	make -C win32
+
 
 .PHONY: test
 test:
@@ -14,4 +21,5 @@ test:
 .PHONY: clean
 clean:
 	make -C ffi clean
+	make -C win32 clean
 
