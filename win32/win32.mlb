@@ -2,6 +2,7 @@
 ann "allowFFI true" in
 	$(SML_LIB)/basis/basis.mlb
 	../ffi/ffiwin32.mlb
+	Base.sml
 	MessageBox.sig
 	MessageBox.sml
 	Class.sig

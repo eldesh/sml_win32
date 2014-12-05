@@ -4,6 +4,7 @@ library
 is
   $/basis.cm
   ../ffi/ffiwin32.cm
+  Base.sml
   MessageBox.sig
   MessageBox.sml
   Class.sig

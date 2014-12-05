@@ -2,8 +2,9 @@
 structure MessageBox : MESSAGE_BOX =
 struct
 local
+  open Base
 in
-  type HWND = (ST_HWND__.tag, C.rw) C.su_obj C.ptr'
+  type HWND = HWND
 
   structure MessageBoxStyle =
   struct
@@ -112,7 +113,7 @@ in
 
   fun MessageBox (hwnd:HWND option, text, caption, style) =
   let
-    val hwnd = getOpt (hwnd, C.Ptr.null')
+    val hwnd = getOpt (hwnd, Handle.null)
     val ret = valOf o Result.fromInt o MLRep.Int.Signed.toInt
   in
     ret (F_MessageBoxA.f' (hwnd, ZS.dupML' text, ZS.dupML' caption, style))
