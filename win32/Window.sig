@@ -8,6 +8,7 @@ sig
     structure Style:
     sig
         include BIT_FLAGS
+        type t = flags
         val WS_OVERLAPPED: flags and WS_POPUP: flags and WS_CHILD: flags and WS_MINIMIZE: flags
         and WS_VISIBLE: flags and WS_DISABLED:flags and WS_CLIPSIBLINGS:flags
         and WS_CLIPCHILDREN:flags and WS_MAXIMIZE:flags and WS_CAPTION:flags
@@ -18,9 +19,10 @@ sig
         and WS_POPUPWINDOW:flags and WS_CHILDWINDOW:flags
     end
     
-    structure ExStyle:
+    structure ExStyle :
     sig
         include BIT_FLAGS
+        type t = flags
         val WS_EX_DLGMODALFRAME: flags and WS_EX_NOPARENTNOTIFY: flags and WS_EX_TOPMOST: flags
         and WS_EX_ACCEPTFILES : flags and WS_EX_TRANSPARENT: flags and WS_EX_MDICHILD: flags
         and WS_EX_TOOLWINDOW: flags and WS_EX_WINDOWEDGE: flags and WS_EX_CLIENTEDGE: flags
@@ -32,129 +34,38 @@ sig
         and WS_EX_LAYOUTRTL: flags and WS_EX_COMPOSITED: flags and WS_EX_NOACTIVATE: flags
     end
 
-    datatype WindowPositionStyle =
-            SWP_ASYNCWINDOWPOS
-        |   SWP_DEFERERASE
-        |   SWP_FRAMECHANGED
-        |   SWP_HIDEWINDOW
-        |   SWP_NOACTIVATE
-        |   SWP_NOCOPYBITS
-        |   SWP_NOMOVE
-        |   SWP_NOOWNERZORDER
-        |   SWP_NOREDRAW
-        |   SWP_NOSENDCHANGING
-        |   SWP_NOSIZE
-        |   SWP_NOZORDER
-        |   SWP_SHOWWINDOW
-        |   SWP_OTHER of int
+    structure ShowWindowOptions :
+    sig
+      datatype t = SW_FORCEMINIMIZE
+                 | SW_HIDE
+                 | SW_MAXIMIZE
+                 | SW_MINIMIZE
+                 | SW_RESTORE
+                 | SW_SHOW
+                 | SW_SHOWDEFAULT
+                 | SW_SHOWMAXIMIZED
+                 | SW_SHOWMINIMIZED
+                 | SW_SHOWMINNOACTIVE
+                 | SW_SHOWNA
+                 | SW_SHOWNOACTIVATE
+                 | SW_SHOWNORMAL
 
-    datatype ShowWindowOptions =
-        SW_FORCEMINIMIZE
-    |   SW_HIDE
-    |   SW_MAXIMIZE
-    |   SW_MINIMIZE
-    |   SW_RESTORE
-    |   SW_SHOW
-    |   SW_SHOWDEFAULT
-    |   SW_SHOWMAXIMIZED
-    |   SW_SHOWMINIMIZED
-    |   SW_SHOWMINNOACTIVE
-    |   SW_SHOWNA
-    |   SW_SHOWNOACTIVATE
-    |   SW_SHOWNORMAL
+      val toInt : t -> int
+      val fromInt : int -> t option
+    end
 
-    val SW_NORMAL: ShowWindowOptions
-    val SW_MAX: ShowWindowOptions
+    val SW_NORMAL: ShowWindowOptions.t
+    val SW_MAX: ShowWindowOptions.t
 
-    val ShowWindow: HWND * ShowWindowOptions -> bool
-
-    datatype GetWindowFlags =
-        GW_CHILD
-    |   GW_HWNDFIRST
-    |   GW_HWNDLAST
-    |   GW_HWNDNEXT
-    |   GW_HWNDPREV
-    |   GW_OWNER
-
-    datatype ParentType =
-          ChildWindow of {id: int, parent: HWND}
-        | PopupWindow of HMENU
-        | PopupWithClassMenu
-
-    val GWL_EXSTYLE : int
-    val GWL_HINSTANCE : int
-    val GWL_HWNDPARENT : int
-    val GWL_ID : int
-    val GWL_STYLE : int
-    val GWL_USERDATA : int
-
-(*
-    val AdjustWindowRect : RECT * Style.flags * bool -> RECT
-    val AdjustWindowRectEx :  RECT * Style.flags * bool * int -> RECT
-    val ArrangeIconicWindows : HWND -> int
-    val BringWindowToTop : HWND -> unit
-    *)
-    val CW_USEDEFAULT : int
-    (*
-    val ChildWindowFromPoint : HWND * POINT -> HWND option
-	*)
-    val CloseWindow : HWND -> unit
 	(*
     val CreateWindow :
        {x: int, y: int, init: 'a, name: string, class: 'a Class.ATOM,
          style: Style.flags, width: int, height: int,
          instance: HINSTANCE, relation: ParentType} -> HWND
+         *)
     val CreateWindowEx :
-       {x: int, y: int, init: 'a, name: string, class: 'a Class.ATOM,
-         style: Style.flags, width: int, height: int,
-         instance: HINSTANCE, relation: ParentType, exStyle: ExStyle.flags} -> HWND
-    val CreateMDIClient: {
-            relation: ParentType, style: Style.flags, instance: HINSTANCE, windowMenu: HMENU,
-            idFirstChild: int} -> HWND
-    val DefWindowProc: HWND * Message.Message -> Message.LRESULT
-    val DefFrameProc: HWND * HWND * Message.Message -> Message.LRESULT
-    val DefMDIChildProc: HWND * Message.Message -> Message.LRESULT
-    val DestroyWindow: HWND -> unit
-	*)
-    val FindWindow: string * string option -> HWND
-    val FindWindowEx: HWND option * HWND option * string * string option -> HWND
-    val GetClassName : HWND -> string
-    val GetClientRect : HWND -> RECT
-    val GetDesktopWindow : unit -> HWND
-    val GetForegroundWindow : unit -> HWND
-    val GetLastActivePopup : HWND -> HWND
-    val GetNextWindow : HWND * GetWindowFlags -> HWND
-    val GetParent : HWND -> HWND option
-    val GetTopWindow : HWND option -> HWND option
-    val GetWindow : HWND * GetWindowFlags -> HWND option
-	(*
-    val GetWindowContextHelpId : HWND -> int
-    val GetWindowLong : HWND * int -> int
-	*)
-    val GetWindowRect : HWND -> RECT
-    val GetWindowText : HWND -> string
-    val GetWindowTextLength : HWND -> int
-    val IsChild : HWND * HWND -> bool
-    val IsIconic : HWND -> bool
-    val IsWindow : HWND -> bool
-    val IsWindowVisible : HWND -> bool
-    val IsZoomed : HWND -> bool
-	(*
-    val MoveWindow : {x: int, y: int, hWnd: HWND, width: int, height: int, repaint: bool} -> unit
-    val OpenIcon : HWND -> unit
-    val SetForegroundWindow : HWND -> bool
-    val SetParent : HWND * HWND option -> HWND
-    val SetWindowContextHelpId : HWND * int -> unit
-    val SetWindowLong : HWND * int * int -> int
-    val SetWindowPos : HWND * HWND * int * int * int * int * WindowPositionStyle list -> unit
-	*)
-    val SetWindowText : HWND * string -> unit
-	(*
-    val SubclassWindow :
-       HWND *
-       (HWND * Message.Message * 'a -> Message.LRESULT * 'a) * 'a ->
-           (HWND  * Message.Message) -> Message.LRESULT
-    val WindowFromPoint : POINT -> HWND option
-	*)
+       {x: int, y: int, init: 'a, name: string, class: Class.Atom.t,
+         style: Style.t, width: int, height: int,
+         instance: HINSTANCE, relation: ParentType.t, exStyle: ExStyle.t} -> HWND
 end
 
