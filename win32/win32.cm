@@ -1,6 +1,8 @@
 library
   signature MESSAGE_BOX
   structure MessageBox
+  signature CLASS
+  structure Class
 is
   $/basis.cm
   ../ffi/ffiwin32.cm
@@ -9,4 +11,5 @@ is
   MessageBox.sml
   Class.sig
   Class.sml
+  WinBase.sml
 

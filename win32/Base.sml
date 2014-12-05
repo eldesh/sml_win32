@@ -19,8 +19,15 @@ in
   struct
     type HWND = (ST_HWND__.tag, C.rw) C.su_obj C.ptr'
     val null : HWND = C.Ptr.null'
+    fun isNull p = C.Ptr.isNull' p
   end
   open Handle
+
+  structure Menu : sig type t end =
+  struct
+    type t = unit
+  end
+  type HMENU = (Menu.t, C.rw) C.obj C.ptr
 end
 end
 

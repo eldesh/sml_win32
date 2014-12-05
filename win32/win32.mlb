@@ -7,5 +7,6 @@ ann "allowFFI true" in
 	MessageBox.sml
 	Class.sig
 	Class.sml
+	WinBase.sml
 end
 
