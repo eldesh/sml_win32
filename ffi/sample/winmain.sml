@@ -42,7 +42,7 @@ struct
     WinMain ( hInstance
             , hPrevInstance
             , ["WinMain"]
-            , if Word32.andb (dwFlags, 0w1) = 0w0
+            , if Word32.andb (dwFlags, 0w1) <> 0w0
               then wShowWindow
               else 0wx10
             )
