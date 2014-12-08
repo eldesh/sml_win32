@@ -64,12 +64,11 @@ sig
   val SW_NORMAL: ShowWindowOptions.t
   val SW_MAX: ShowWindowOptions.t
 
-  (*
   val CreateWindow :
-     {x: int, y: int, init: 'a, name: string, class: 'a Class.ATOM,
-       style: Style.flags, width: int, height: int,
-       instance: HINSTANCE, relation: ParentType} -> HWND
-       *)
+     {x: Int32.int, y: Int32.int, init: C.voidptr, name: string, class: Class.Atom.t,
+       style: Style.t, width: Int32.int, height: Int32.int,
+       instance: HINSTANCE, relation: ParentType.t} -> HWND
+
   val CreateWindowEx :
      {x: Int32.int, y: Int32.int, init: C.voidptr, name: string, class: Class.Atom.t,
        style: Style.t, width: Int32.int, height: Int32.int,

@@ -98,6 +98,28 @@ in
     win
   end
 
+  fun CreateWindow {class: Class.Atom.t,
+                    name: string,
+                    style: Style.t,
+                    x: Int32.int,
+                    y: Int32.int,
+                    width: Int32.int,
+                    height: Int32.int,
+                    relation: ParentType.t,
+                    instance: HINSTANCE, (* application instance *)
+                    init: C.voidptr} =
+    CreateWindowEx {exStyle=ExStyle.fromWord 0w0,
+                    class=class,
+                    name=name,
+                    style=style,
+                    x=x,
+                    y=y,
+                    width=width,
+                    height=height,
+                    relation=relation,
+                    instance=instance,
+                    init=init}
+
   structure Visible =
   struct
     datatype t = Visible
