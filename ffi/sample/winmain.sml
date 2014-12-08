@@ -20,7 +20,7 @@ struct
                 , hInstance
                 , C.Ptr.inject' C.Ptr.null'
                 )
-    val _ = F_ShowWindow.f' (hwnd, MLRep.Int.Signed.fromLarge (Int.toLarge SW_SHOW))
+    val _ = F_ShowWindow.f' (hwnd, MLRep.Long.Signed.fromLarge (Int.toLarge SW_SHOW))
   in
     if F_MessageBoxA.f' (C.Ptr.null'
                         , `"WinMain test..."

@@ -10,7 +10,7 @@ CMS  := $(PROJECT:=.cm)
 SAMPLES := $(PROJECT:=.$(NJ_SUFFIX))
 
 all: $(SAMPLES)
-	@make -C ../ffi
+	@make -C ..
 	@for p in $(PROJECT); do \
 		cmd /C "$(SMLNJ) @SMLload=$${p}.$(NJ_SUFFIX)"; \
 	done

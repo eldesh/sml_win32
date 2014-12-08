@@ -1,0 +1,9 @@
+group
+is
+  $/basis.cm
+  $c/c.cm
+  ../user32/nlffi-generated.cm
+  ../kernel32/nlffi-generated.cm
+  ../mlrep/bitop-fn.sml
+  ../mlrep/nj.sml
+  winmain.sml

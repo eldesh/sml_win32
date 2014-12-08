@@ -2,5 +2,5 @@ group
 is
   $/basis.cm
   $c/c.cm
-  ../ffi/user32/nlffi-generated.cm
+  ../user32/nlffi-generated.cm
   msgbox.sml

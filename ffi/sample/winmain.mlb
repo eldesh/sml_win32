@@ -2,8 +2,8 @@ local
   $(SML_LIB)/basis/basis.mlb
   $(SML_LIB)/mlnlffi-lib/mlnlffi-lib.mlb
 in
-  ../ffi/kernel32/nlffi-generated.mlb
-  ../ffi/user32/nlffi-generated.mlb
+  ../kernel32/nlffi-generated.mlb
+  ../user32/nlffi-generated.mlb
   winmain.sml
   run_winmain.sml
 end
