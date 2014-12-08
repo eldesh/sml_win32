@@ -15,7 +15,7 @@ in
             class = Class.Atom.Static,
             name = "caption",
             style = Style.WS_CAPTION,
-            exStyle = ExStyle.flags[],
+            exStyle = ExStyle.flags[ExStyle.WS_EX_TOOLWINDOW],
             x = 100:Int32.int,
             y = 100:Int32.int,
             width = 200:Int32.int,

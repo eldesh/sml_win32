@@ -18,8 +18,13 @@ $(WIN32): $(FFIWIN32)
 test:
 	make -C ffi test
 
+.PHONY: sample
+sample:
+	make -C sample
+
 .PHONY: clean
 clean:
 	make -C ffi clean
 	make -C win32 clean
+	make -C sample clean
 

@@ -31,7 +31,6 @@ test: all test_load
 	cmd /C 'cd test & ml-build strcpy.cm Test.main strcpy'
 	cmd /C 'cd test & sml @SMLload=strcpy.x86-win32'
 
-
 .PHONY: clean
 clean:
 	rm -rf $(MODULES)
