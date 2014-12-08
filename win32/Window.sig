@@ -38,7 +38,6 @@ sig
     sig
       datatype t = SW_FORCEMINIMIZE
                  | SW_HIDE
-                 | SW_MAXIMIZE
                  | SW_MINIMIZE
                  | SW_RESTORE
                  | SW_SHOW
@@ -50,6 +49,7 @@ sig
                  | SW_SHOWNOACTIVATE
                  | SW_SHOWNORMAL
 
+      val SW_MAXIMIZE : t
       val toInt : t -> int
       val fromInt : int -> t option
     end

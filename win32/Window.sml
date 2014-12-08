@@ -18,7 +18,6 @@ in
   struct
     datatype t = SW_FORCEMINIMIZE
                | SW_HIDE
-               | SW_MAXIMIZE
                | SW_MINIMIZE
                | SW_RESTORE
                | SW_SHOW
@@ -30,13 +29,14 @@ in
                | SW_SHOWNOACTIVATE
                | SW_SHOWNORMAL
 
+    val SW_MAXIMIZE = SW_SHOWMAXIMIZED
+
     fun toInt opt =
       case opt of
            SW_HIDE             => 0
          | SW_SHOWNORMAL       => 1
          | SW_SHOWMINIMIZED    => 2
          | SW_SHOWMAXIMIZED    => 3
-         | SW_MAXIMIZE         => 3
          | SW_SHOWNOACTIVATE   => 4
          | SW_SHOW             => 5
          | SW_MINIMIZE         => 6
@@ -52,7 +52,6 @@ in
          | 1  => SOME SW_SHOWNORMAL
          | 2  => SOME SW_SHOWMINIMIZED
          | 3  => SOME SW_SHOWMAXIMIZED
-         | 3  => SOME SW_MAXIMIZE
          | 4  => SOME SW_SHOWNOACTIVATE
          | 5  => SOME SW_SHOW
          | 6  => SOME SW_MINIMIZE
