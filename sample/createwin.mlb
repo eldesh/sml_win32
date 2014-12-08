@@ -1,0 +1,9 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/mlnlffi-lib/c.mlb
+  ../win32/win32.mlb
+in
+  createwin.sml
+  sample_runner.sml
+end
+
