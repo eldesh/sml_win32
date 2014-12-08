@@ -158,7 +158,7 @@ in
   struct
     datatype t = PopupWithClassMenu      (* Popup or overlapped window using class menu. *)
                | PopupWindow of HMENU    (* Popup or overlapped window with supplied menu. *)
-               | ChildWindow of { parent: HWND, id: int } (* Child window. *)
+               | ChildWindow of { parent: HWND, id: MLRep.Long.Unsigned.word } (* Child window. *)
   end
 
   exception NotImplemented of string
@@ -173,11 +173,11 @@ in
     fun unpackWindowRelation(relation: ParentType.t, style) =
       case relation of
           PopupWithClassMenu =>
-              (Handle.null, 0, toWord(clear(WS_CHILD, style)))
+              (Handle.null, Handle.null, toWord(clear(WS_CHILD, style)))
       |   PopupWindow hm =>
-              (Handle.null, raise NotImplemented "unpackWindowRelation", toWord(clear(WS_CHILD, style)))
+              (Handle.null, hm, toWord(clear(WS_CHILD, style)))
       |   ChildWindow{parent, id} =>
-              (parent, id, toWord(flags[WS_CHILD, style]))
+              (parent, C.U.i2p (C.Cvt.c_ulong id), toWord(flags[WS_CHILD, style]))
   end
 end (* local *)
 end

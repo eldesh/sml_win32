@@ -3,10 +3,14 @@ ann "allowFFI true" in
 	$(SML_LIB)/basis/basis.mlb
 	../ffi/ffiwin32.mlb
 	Base.sml
+	Libloader.sig
+	Libloader.sml
 	MessageBox.sig
 	MessageBox.sml
 	Class.sig
 	Class.sml
 	WinBase.sml
+	Window.sig
+	Window.sml
 end
 

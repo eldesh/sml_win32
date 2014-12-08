@@ -113,8 +113,8 @@ in
 
   fun MessageBox (hwnd:HWND option, text, caption, style) =
   let
-    val hwnd = getOpt (hwnd, Handle.null)
-    val ret = valOf o Result.fromInt o MLRep.Int.Signed.toInt
+    val hwnd = C.Ptr.inject' (getOpt (hwnd, Handle.null))
+    val ret = valOf o Result.fromInt o MLRep.Long.Signed.toInt
   in
     ret (F_MessageBoxA.f' (hwnd, ZS.dupML' text, ZS.dupML' caption, style))
   end
@@ -123,7 +123,7 @@ in
 
   fun MessageBeep uType =
   let
-    val uType = MLRep.Int.Unsigned.fromLarge
+    val uType = MLRep.Long.Unsigned.fromLarge
                     (SysWord.toLarge (MessageBoxStyle.toWord uType))
   in
     F_MessageBeep.f uType = 0

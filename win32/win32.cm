@@ -1,15 +1,24 @@
 library
+  structure Base
   signature MESSAGE_BOX
   structure MessageBox
   signature CLASS
   structure Class
+  signature WINDOW
+  structure Window
+  signature LIB_LOADER
+  structure Libloader
 is
   $/basis.cm
   ../ffi/ffiwin32.cm
   Base.sml
+  Libloader.sig
+  Libloader.sml
   MessageBox.sig
   MessageBox.sml
   Class.sig
   Class.sml
   WinBase.sml
+  Window.sig
+  Window.sml
 

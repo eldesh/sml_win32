@@ -57,15 +57,22 @@ sig
     val SW_NORMAL: ShowWindowOptions.t
     val SW_MAX: ShowWindowOptions.t
 
-	(*
+    structure ParentType :
+    sig
+      datatype t = PopupWithClassMenu
+                 | PopupWindow of HMENU
+                 | ChildWindow of { parent: HWND, id: MLRep.Long.Unsigned.word }
+    end
+
+    (*
     val CreateWindow :
        {x: int, y: int, init: 'a, name: string, class: 'a Class.ATOM,
          style: Style.flags, width: int, height: int,
          instance: HINSTANCE, relation: ParentType} -> HWND
          *)
     val CreateWindowEx :
-       {x: int, y: int, init: 'a, name: string, class: Class.Atom.t,
-         style: Style.t, width: int, height: int,
+       {x: Int32.int, y: Int32.int, init: C.voidptr, name: string, class: Class.Atom.t,
+         style: Style.t, width: Int32.int, height: Int32.int,
          instance: HINSTANCE, relation: ParentType.t, exStyle: ExStyle.t} -> HWND
 end
 

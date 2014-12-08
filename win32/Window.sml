@@ -64,31 +64,35 @@ in
          | _  => NONE
   end
 
-  val SW_NORMAL = SW_SHOWNORMAL
-  val SW_MAX = SW_SHOWDEFAULT
+  val SW_NORMAL = ShowWindowOptions.SW_SHOWNORMAL
+  val SW_MAX = ShowWindowOptions.SW_SHOWDEFAULT
 
   fun CreateWindowEx {class: Class.Atom.t,
                       name: string,
                       style: Style.t,
                       exStyle: ExStyle.t,
-                      x: int,
-                      y: int,
-                      width: int,
-                      height: int,
+                      x: Int32.int,
+                      y: Int32.int,
+                      width: Int32.int,
+                      height: Int32.int,
                       relation: ParentType.t,
                       instance: HINSTANCE, (* application instance *)
                       init: C.voidptr}: HWND =
   let
     val ` = ZString.dupML'
-    val exStyle = MLRep.Unsigned.fromLarge (SysWord.toLarge (ExStyle.toWord exStyle))
+    val exStyle = MLRep.Long.Unsigned.fromLarge (SysWord.toLarge (ExStyle.toWord exStyle))
     val className = Class.Atom.toString class
     val (parent, menu, styleWord) = WinBase.unpackWindowRelation(relation, style)
 
     (* Create a window. *)
-    val win =
+    val win : HWND =
+      C.Ptr.cast' (
       F_CreateWindowExA.f' (exStyle, `className, `name, styleWord
                             , x, y, width, height
-                            , parent, menu, instance, init)
+                            , C.Ptr.inject' parent
+                            , C.Ptr.inject' menu
+                            , C.Ptr.inject' instance
+                            , init))
   in
     checkResult(not(isNull win));
     win
