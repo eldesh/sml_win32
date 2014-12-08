@@ -5,7 +5,7 @@ FFICMS := $(MODULES:=/nlffi-generated.cm)
 all: $(FFICMS)
 
 
-%/nlffi-generated.cm: %/libh.sml include/%.h
+%/nlffi-generated.cm: %/libh.sml include/%.h include/wintype.h
 	@echo " [FFIGen] $(patsubst %/,%,$(dir $@))"
 	@cmd /C 'ml-nlffigen -dir $(patsubst %/,%,$(dir $@)) -include libh.sml include/$(patsubst %/,%,$(dir $@)).h'
 
