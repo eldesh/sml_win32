@@ -7,13 +7,20 @@ structure MLRep = struct
   (* structure Short = ...  *)
     structure Int =
        struct
+          structure Signed = Int
+          structure Unsigned = Word
+          (* word-style bit-operations on integers... *)
+          structure SignedBitops = IntBitOps(structure I = Signed
+                                             structure W = Unsigned)
+       end
+    structure Long =
+       struct
           structure Signed = Int32
           structure Unsigned = Word32
           (* word-style bit-operations on integers... *)
           structure SignedBitops = IntBitOps(structure I = Signed
                                              structure W = Unsigned)
        end  
-    (* structure Long = ...  *)
     structure LongLong =
        struct
           structure Signed = Int64
