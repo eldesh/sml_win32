@@ -44,6 +44,18 @@ typedef char *PSZ;
 typedef void *PVOID,*LPVOID;
 typedef unsigned int UINT,*PUINT,*LPUINT;
 
+// basetsd.h
+typedef int INT_PTR,*PINT_PTR;
+typedef unsigned int UINT_PTR,*PUINT_PTR;
+typedef long LONG_PTR,*PLONG_PTR;
+typedef unsigned long ULONG_PTR,*PULONG_PTR;
+
+// minwindef.h
+typedef UINT_PTR WPARAM;
+typedef LONG_PTR LPARAM;
+typedef LONG_PTR LRESULT;
+
+
 typedef int BOOL;
 
 typedef unsigned long DWORD;
@@ -145,6 +157,7 @@ typedef struct tagPOINTS {
   SHORT y;
 } POINTS,*PPOINTS,*LPPOINTS;
 
+typedef WORD ATOM;
 
 #endif    /* WINAPI_WINTYPE_INCLUDED */
 

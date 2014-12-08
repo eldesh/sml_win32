@@ -21,11 +21,17 @@ in
     datatype HMENU     = HMENU
     datatype HINSTANCE = HINSTANCE
         type HMODULE   = HINSTANCE
+    datatype HICON     = HICON
+        type HCURSOR   = HICON
+    datatype HBRUSH    = HBRUSH
 
     type HWND      = (HWND     , C.rw) C.su_obj C.ptr'
     type HMENU     = (HMENU    , C.rw) C.su_obj C.ptr'
     type HINSTANCE = (HINSTANCE, C.rw) C.su_obj C.ptr'
     type HMODULE   = (HMODULE  , C.rw) C.su_obj C.ptr'
+    type HICON     = (HICON    , C.rw) C.su_obj C.ptr'
+    type HCURSOR   = (HCURSOR  , C.rw) C.su_obj C.ptr'
+    type HBRUSH    = (HBRUSH   , C.rw) C.su_obj C.ptr'
 
     val null : ('a, 'rw) C.su_obj C.ptr' = C.Ptr.null'
     fun isNull (p: ('a, 'rw) C.su_obj C.ptr') = C.Ptr.isNull' p
