@@ -96,6 +96,22 @@ in
     checkResult(not(isNull win));
     win
   end
+
+  structure Visible =
+  struct
+    datatype t = Visible
+               | NonVisible
+  end
+
+  fun ShowWindow (win, style) =
+  let
+    val style = MLRep.Long.Signed.fromInt (ShowWindowOptions.toInt style)
+  in
+    if F_ShowWindow.f' (C.Ptr.inject' win, style) <> 0
+    then Visible.Visible
+    else Visible.NonVisible
+  end
+
 end
 end
 

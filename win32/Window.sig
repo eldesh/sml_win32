@@ -74,5 +74,14 @@ sig
        {x: Int32.int, y: Int32.int, init: C.voidptr, name: string, class: Class.Atom.t,
          style: Style.t, width: Int32.int, height: Int32.int,
          instance: HINSTANCE, relation: ParentType.t, exStyle: ExStyle.t} -> HWND
+
+    structure Visible :
+    sig
+      datatype t = Visible
+                 | NonVisible
+    end
+
+    val ShowWindow : HWND * ShowWindowOptions.t -> Visible.t
+
 end
 
