@@ -4,7 +4,14 @@
 
 structure MLRep = struct
   (* structure Char = ... *)
-  (* structure Short = ...  *)
+    structure Short =
+       struct
+          structure Signed = Int32
+          structure Unsigned = Word32
+          (* word-style bit-operations on integers... *)
+          structure SignedBitops = IntBitOps(structure I = Signed
+                                             structure W = Unsigned)
+       end
     structure Int =
        struct
           structure Signed = Int

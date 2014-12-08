@@ -8,6 +8,8 @@ library
   structure Window
   signature LIB_LOADER
   structure Libloader
+  signature WIN_MAIN
+  structure WinMain
 is
   $/basis.cm
   ../ffi/ffiwin32.cm
@@ -21,4 +23,6 @@ is
   WinBase.sml
   Window.sig
   Window.sml
+  WinMain.sig
+  WinMain.sml
 

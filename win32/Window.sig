@@ -50,8 +50,8 @@ sig
                  | SW_SHOWNORMAL
 
       val SW_MAXIMIZE : t
-      val toInt : t -> int
-      val fromInt : int -> t option
+      val toWord : t -> SysWord.word
+      val fromWord : SysWord.word -> t option
     end
 
     val SW_NORMAL: ShowWindowOptions.t

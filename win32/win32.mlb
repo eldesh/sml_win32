@@ -12,5 +12,7 @@ ann "allowFFI true" in
 	WinBase.sml
 	Window.sig
 	Window.sml
+	WinMain.sig
+	WinMain.sml
 end
 

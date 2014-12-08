@@ -31,35 +31,35 @@ in
 
     val SW_MAXIMIZE = SW_SHOWMAXIMIZED
 
-    fun toInt opt =
+    fun toWord opt : SysWord.word =
       case opt of
-           SW_HIDE             => 0
-         | SW_SHOWNORMAL       => 1
-         | SW_SHOWMINIMIZED    => 2
-         | SW_SHOWMAXIMIZED    => 3
-         | SW_SHOWNOACTIVATE   => 4
-         | SW_SHOW             => 5
-         | SW_MINIMIZE         => 6
-         | SW_SHOWMINNOACTIVE  => 7
-         | SW_SHOWNA           => 8
-         | SW_RESTORE          => 9
-         | SW_SHOWDEFAULT      => 10
-         | SW_FORCEMINIMIZE    => 11
+           SW_HIDE             => 0w0
+         | SW_SHOWNORMAL       => 0w1
+         | SW_SHOWMINIMIZED    => 0w2
+         | SW_SHOWMAXIMIZED    => 0w3
+         | SW_SHOWNOACTIVATE   => 0w4
+         | SW_SHOW             => 0w5
+         | SW_MINIMIZE         => 0w6
+         | SW_SHOWMINNOACTIVE  => 0w7
+         | SW_SHOWNA           => 0w8
+         | SW_RESTORE          => 0w9
+         | SW_SHOWDEFAULT      => 0w10
+         | SW_FORCEMINIMIZE    => 0w11
 
-    fun fromInt n =
-      case n of
-           0  => SOME SW_HIDE
-         | 1  => SOME SW_SHOWNORMAL
-         | 2  => SOME SW_SHOWMINIMIZED
-         | 3  => SOME SW_SHOWMAXIMIZED
-         | 4  => SOME SW_SHOWNOACTIVATE
-         | 5  => SOME SW_SHOW
-         | 6  => SOME SW_MINIMIZE
-         | 7  => SOME SW_SHOWMINNOACTIVE
-         | 8  => SOME SW_SHOWNA
-         | 9  => SOME SW_RESTORE
-         | 10 => SOME SW_SHOWDEFAULT
-         | 11 => SOME SW_FORCEMINIMIZE
+    fun fromWord (w:SysWord.word) =
+      case w of
+           0w0  => SOME SW_HIDE
+         | 0w1  => SOME SW_SHOWNORMAL
+         | 0w2  => SOME SW_SHOWMINIMIZED
+         | 0w3  => SOME SW_SHOWMAXIMIZED
+         | 0w4  => SOME SW_SHOWNOACTIVATE
+         | 0w5  => SOME SW_SHOW
+         | 0w6  => SOME SW_MINIMIZE
+         | 0w7  => SOME SW_SHOWMINNOACTIVE
+         | 0w8  => SOME SW_SHOWNA
+         | 0w9  => SOME SW_RESTORE
+         | 0w10 => SOME SW_SHOWDEFAULT
+         | 0w11 => SOME SW_FORCEMINIMIZE
          | _  => NONE
   end
 
@@ -86,7 +86,8 @@ in
     (* Create a window. *)
     val win : HWND =
       C.Ptr.cast' (
-      F_CreateWindowExA.f' (exStyle, `className, `name, styleWord
+      F_CreateWindowExA.f' (exStyle, `className, `name
+                            , MLRep.Long.Unsigned.fromLarge (SysWord.toLarge styleWord)
                             , x, y, width, height
                             , C.Ptr.inject' parent
                             , C.Ptr.inject' menu
@@ -105,7 +106,9 @@ in
 
   fun ShowWindow (win, style) =
   let
-    val style = MLRep.Long.Signed.fromInt (ShowWindowOptions.toInt style)
+    val style = MLRep.Long.Signed.fromLarge
+                  (SysWord.toLargeInt
+                    (ShowWindowOptions.toWord style))
   in
     if F_ShowWindow.f' (C.Ptr.inject' win, style) <> 0
     then Visible.Visible
