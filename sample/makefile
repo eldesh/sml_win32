@@ -5,7 +5,7 @@ MLBUILD := ml-build.bat
 NJ_SUFFIX:=$(shell echo "TextIO.output(TextIO.stdOut, SMLofNJ.SysInfo.getHeapSuffix()^\"\n\");" \
                         | $(SMLNJ) | head -n 5 | tail -n 1)
 
-PROJECT := createwin
+PROJECT := createwin registerwin
 CMS  := $(PROJECT:=.cm)
 
 SAMPLES := $(PROJECT:=.$(NJ_SUFFIX))
@@ -20,8 +20,12 @@ createwin.$(NJ_SUFFIX): createwin.cm
 	@echo "  [SML] $(notdir $<)"
 	cmd /C '$(MLBUILD) $< CreateWin.main createwin'
 
-createwin$(EXE): createwin.mlb createwin.sml
+%$(EXE): %.mlb %.sml
 	mlton -output $@ $<
+
+registerwin.$(NJ_SUFFIX): registerwin.cm
+	@echo "  [SML] $(notdir $<)"
+	cmd /C '$(MLBUILD) $< RegisterWin.main registerwin'
 
 .PHONY: clean
 clean:

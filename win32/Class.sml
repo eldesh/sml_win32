@@ -102,6 +102,7 @@ in
                        , className
                        }) =
   let
+    val () = raise Fail "NotImplementedYet RegisterClass"
     val winc : (W.tag C.su, C.rw) C.obj = C.new W.typ
     val style = MLRep.Long.Unsigned.fromLarge (SysWord.toLarge (Style.toWord style))
     val () = C.Set.uint (W.f_style winc, style)
